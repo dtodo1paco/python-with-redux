@@ -1,0 +1,1 @@
+export const CENSUS_RECEIVED = 'CENSUS_RECEIVED';
