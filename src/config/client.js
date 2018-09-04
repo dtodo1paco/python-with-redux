@@ -20,7 +20,7 @@ let configProd = {
 let config;
 if (isProd) {
     console.log("Using production settings");
-    config = configDev;
+    config = configProd;
 } else {
     console.log("Using development settings");
     config = configDev;
