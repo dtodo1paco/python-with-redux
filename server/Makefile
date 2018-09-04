@@ -18,6 +18,9 @@ tests:
 run:
 	python manage.py run
 
+prod:
+	python3 manage.py run
+
 db-clean:
 	find . -type f -name '*.db' -delete
 	rm -rf migrations

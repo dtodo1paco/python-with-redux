@@ -11,7 +11,7 @@ class Person(db.Model, JsonModel):
     """ Person Model for storing user related details """
     __tablename__ = 'person'
     id = db.Column(db.String, primary_key=True, nullable=False)
-    key = db.Column(db.String, primary_key=True, nullable=False)
+    key = db.Column(db.String, primary_key=False, nullable=False)
     name = db.Column(db.String(50), unique=False, nullable=False)
     surname = db.Column(db.String(150), unique=False, nullable=False)
     birthday = db.Column(db.DateTime, unique=False, nullable=True)

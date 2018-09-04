@@ -9,7 +9,8 @@ const path = require('path');
 
 const paths = {
   src: path.resolve(__dirname, 'src'),
-  build: path.resolve(__dirname, 'build')
+  build: path.resolve(__dirname, 'build'),
+  dist: path.resolve(__dirname, 'server/static')
 }
 
 const uglifyConfig = {
@@ -93,7 +94,6 @@ const common = {
   plugins: [
     new CleanWebpackPlugin([paths.build]),
     new HtmlWebpackPlugin(htmlConfig),
-    new ExtractTextPlugin('styles.[contenthash].css'),
   ]
 };
 
@@ -110,20 +110,22 @@ const devSettings = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin([paths.build]),
+    new ExtractTextPlugin('styles.[contenthash].css'),
   ]
 }
 
 const prodSettings = {
   devtool: 'source-map',
   output: {
-    path: paths.build,
-    filename: 'bundle.[hash].js',
-    publicPath: '/build/'
+    path: paths.dist,
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': {
       NODE_ENV: JSON.stringify('production')
     }}),
+    new ExtractTextPlugin('styles.css'),
     new webpack.optimize.UglifyJsPlugin(uglifyConfig),
     new OptimizeCssAssetsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),

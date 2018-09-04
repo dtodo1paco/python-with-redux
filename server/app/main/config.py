@@ -1,9 +1,20 @@
 import os
 
-# if database url is available from environment variable
+def str2bool(v):
+    return v.lower() in ("yes", "true", "True", "t", "1")
+
+##
+# READ ENVIRONMENT
+##
+local_base = None
+local_port = 5000
+create_db = False
 if "DATABASE_URL" in os.environ:
     local_base = os.environ['DATABASE_URL']
-local_base = None
+if "PORT" in os.environ:
+    local_port = os.environ['PORT']
+if "CREATE_DB" in os.environ:
+    create_db = str2bool(os.environ['CREATE_DB'])
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -17,7 +28,9 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'dev.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    STATIC_FOLDER = '../../public'
+    STATIC_FOLDER = '../../static'
+    PORT = local_port
+    CREATE_DB = create_db
 
 
 class TestingConfig(Config):
@@ -30,7 +43,11 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     DEBUG = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    print ("connecting to " + str(local_base))
     SQLALCHEMY_DATABASE_URI = local_base
+    PORT=local_port
+    CREATE_DB = create_db
 
 
 config_by_name = dict(

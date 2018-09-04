@@ -13,8 +13,9 @@
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port 3000 --history-api-fallback",
     "build": "./node_modules/webpack/bin/webpack.js --config webpack.config.js",
     "compress": "./node_modules/webpack/bin/webpack.js --config webpack.config.js",
-    "production": "npm run build && npm run serve",
-    "serve": "cd server && make run",
+    "production": "npm run build && npm run server-prod",
+    "server-prod": "cd server && export BACKEND_ENV=prod && make prod",
+    "server": "cd server && make run",
     "lint-js": "./node_modules/eslint/bin/eslint.js -c './src/config/.eslintrc.js' src/",
     "jest": "./node_modules/jest/bin/jest.js",
     "test": "npm run build && npm run jest && cd server && make tests"
