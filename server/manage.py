@@ -19,9 +19,10 @@ if env == "dev":
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index(path):
-    res = path
-    if len(path) < 2:
-        res = 'index.html'
+    res = 'index.html'
+    print("path ["+path+"]")
+    if path == 'styles.css' or path == 'bundle.js' or path == 'favicon.ico':
+        res = path
     return send_file('../../static/'+res)
 
 manager = Manager(app)
