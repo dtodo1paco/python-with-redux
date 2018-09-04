@@ -13,7 +13,8 @@ app = setup_app(env)
 app.register_blueprint(blueprint)
 
 app.app_context().push()
-if "CREATE_DB" in app.config:
+print ("Creating new database: " + str(app.config['CREATE_DB']))
+if 'CREATE_DB' in app.config:
     db.create_all() # create everything
 
 @app.route('/', defaults={'path': ''})

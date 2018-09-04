@@ -1,5 +1,8 @@
 import os
 
+def str2bool(v):
+    return v.lower() in ("yes", "true", "True", "t", "1")
+
 ##
 # READ ENVIRONMENT
 ##
@@ -11,7 +14,7 @@ if "DATABASE_URL" in os.environ:
 if "PORT" in os.environ:
     local_port = os.environ['PORT']
 if "CREATE_DB" in os.environ:
-    create_db = os.environ['CREATE_DB']
+    create_db = str2bool(os.environ['CREATE_DB'])
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,7 +30,7 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     STATIC_FOLDER = '../../static'
     PORT = local_port
-    CRAETE_DB = create_db
+    CREATE_DB = create_db
 
 
 class TestingConfig(Config):
@@ -44,7 +47,7 @@ class ProductionConfig(Config):
     print ("connecting to " + str(local_base))
     SQLALCHEMY_DATABASE_URI = local_base
     PORT=local_port
-    CRAETE_DB = create_db
+    CREATE_DB = create_db
 
 
 config_by_name = dict(
