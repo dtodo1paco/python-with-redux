@@ -13,8 +13,8 @@ app = setup_app(env)
 app.register_blueprint(blueprint)
 
 app.app_context().push()
-if env == "dev":
-    db.create_all() # I DO create everything
+if "CREATE_DB" in app.config:
+    db.create_all() # create everything
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
