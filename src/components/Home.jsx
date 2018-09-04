@@ -23,7 +23,7 @@ export class Home extends Component {
     }
 
     loadData() {
-        this.props.fetchData(config.endpoint + 'census');
+        this.props.fetchData(config.endpoint + 'census/');
     }
     render() {
         const { isFetching, items, error } = this.props;
