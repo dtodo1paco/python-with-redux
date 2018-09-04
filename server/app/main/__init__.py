@@ -9,7 +9,7 @@ db = SQLAlchemy()
 flask_bcrypt = Bcrypt()
 
 def setup_app(config_name):
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/', static_folder='../../static/', template_folder='../../static')
     print ("setup app with env:",config_name)
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.config.from_object(config_by_name[config_name])
