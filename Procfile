@@ -1,1 +1,1 @@
-worker: cd server && python3 manage.py run
+web: cd server && python3 manage.py run

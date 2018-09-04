@@ -11,8 +11,8 @@ let configDev = {
 let configProd = {
     api: {
         protocol: 'https',
-        host: '...heroku',
-        port: 80,
+        host: 'my-population.herokuapp.com',
+        port: 443,
         prefix: 'api'
     },
 };

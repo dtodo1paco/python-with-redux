@@ -1,9 +1,14 @@
 import os
 
-# if database url is available from environment variable
+##
+# READ ENVIRONMENT
+##
 local_base = None
+local_port = 5000
 if "DATABASE_URL" in os.environ:
     local_base = os.environ['DATABASE_URL']
+if "PORT" in os.environ:
+    local_port = os.environ['PORT']
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -18,6 +23,7 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'dev.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     STATIC_FOLDER = '../../static'
+    PORT=local_port
 
 
 class TestingConfig(Config):
@@ -33,6 +39,7 @@ class ProductionConfig(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     print ("connecting to " + str(local_base))
     SQLALCHEMY_DATABASE_URI = local_base
+    PORT=local_port
 
 
 config_by_name = dict(
